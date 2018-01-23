@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Member registration</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<br><br>
+<p>Tell us about yourself</p>
+<ion-item>
+    <ion-label floating>Name</ion-label>
+    <ion-input type="text" [(ngModel)]="tb_name"></ion-input>
+</ion-item>
+
+
+<ion-item>
+    <ion-label>Gender</ion-label>
+    <ion-select [(ngModel)]="gender">
+      <ion-option value="female">Female</ion-option>
+      <ion-option value="male">Male</ion-option>
+    </ion-select>
+</ion-item>
+
+<ion-item>
+    <ion-label>Native Japanese</ion-label>
+    <ion-select [(ngModel)]="japnative">
+      <ion-option value="yes">Yes</ion-option>
+      <ion-option value="no">No</ion-option>
+    </ion-select>
+</ion-item>
+
+<ion-item>
+    <ion-label>Organiser</ion-label>
+    <ion-select [(ngModel)]="organiser">
+      <ion-option value="yes">Yes</ion-option>
+      <ion-option value="no">No</ion-option>
+    </ion-select>
+</ion-item>
+
+<button ion-button (click)="submit()">Submit</button>
+
+</ion-content>

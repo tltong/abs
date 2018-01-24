@@ -1,13 +1,13 @@
-export class Members {
+export class Member {
   name: string;
   gender: string;
-  nativejap: string;
+  japnative: string;
   organiser: string;
 
-  constructor(name, gender, nativejap, organiser){
+  constructor(name, gender, japnative, organiser){
     this.name=name;
     this.gender=gender;    
-    this.nativejap=nativejap;
+    this.japnative=japnative;
     this.organiser=organiser;
   }
     getData(): object {

@@ -3,12 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { PhoneServiceProvider } from '../../providers/phone-service/phone-service';
 
-/**
- * Generated class for the AddMemberPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Member } from '../../utils/member'
 
 @IonicPage()
 @Component({
@@ -19,14 +14,19 @@ export class AddMemberPage {
 
   tb_name: string;
   gender: string;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ps:PhoneServiceProvider) {
+  japnative: string;
+  organiser: string;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ps:PhoneServiceProvider
+  ,public ds:DataServiceProvider) {
   }
 
-
   submit() {
- 
-    this.ps.presentToast(this.gender);
+    var member: Member;
+    member = new Member(this.tb_name,this.gender,this.japnative,this.organiser); 
+    this.ds.pushDataFS("abs-members",member);
+    this.navCtrl.pop();
+    //this.ps.presentToast(this.gender);
 
   }
 

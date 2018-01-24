@@ -3,6 +3,7 @@ export class Member {
   gender: string;
   japnative: string;
   organiser: string;
+  id:string; 
 
   constructor(name, gender, japnative, organiser){
     this.name=name;

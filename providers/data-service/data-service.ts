@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { PhoneServiceProvider } from '../../providers/phone-service/phone-service';
+
 import { AngularFireModule } from 'angularfire2';
 import {
   AngularFirestore,
@@ -15,7 +17,7 @@ export class DataServiceProvider {
   private itemsCollection: AngularFirestoreCollection<any>;
   private items: Observable<any[]>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore,public ps:PhoneServiceProvider) {
   }
 
 pushDataFS(collectionName:string,item:any) {
@@ -43,5 +45,20 @@ pushDataFS(collectionName:string,item:any) {
     this.items = this.itemsCollection.valueChanges();
     return this.items;
   }
+
+
+  pullDataSnapshotChangesFSSimpleQuery(collectionName:string,fieldName:string,valueName:string):Observable<any[]> {
+    this.itemsCollection = this.afs.collection<any>(collectionName, ref => ref.where(fieldName,'==',valueName));
+
+    this.items = this.itemsCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
+    return this.items;
+  }
+ 
 
 }

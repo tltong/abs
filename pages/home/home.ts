@@ -15,5 +15,9 @@ export class HomePage {
       this.navCtrl.push('AddMemberPage');
   }
 
+  goToAdminPage(){
+      this.navCtrl.push('AdminPage');
+  }
+
 
 }

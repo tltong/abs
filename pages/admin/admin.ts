@@ -27,6 +27,29 @@ export class AdminPage {
 
   delete() {
 
+    this.members.subscribe(queriedItems => {
+      if (queriedItems.length > 0) {
+        this.id = queriedItems[0].id;
+      }else {
+        this.id = "not found";
+      }
+   });
+
+
+/*
+    this.members.subscribe(queriedItems => {
+       this.id = "hwew";
+      for (item in queriedItems){
+        if (item.name == this.tb_name) {
+          this.id = item.id;
+          break;    
+        }
+      }      
+
+    });
+*/
+
+/*
     var members:Observable<any[]>;
     members = this.ds.pullDataSnapshotChangesFSSimpleQuery(this.collectionName,"name",this.tb_name);
     members.subscribe(queriedItems => {
@@ -37,11 +60,11 @@ export class AdminPage {
       }
 
    });
-
+*/
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminPage');
+    this.members=this.ds.pullDataSnapshotChangesFS(this.collectionName);
   }
 
 }

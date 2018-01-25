@@ -19,4 +19,11 @@
 <button ion-button (click)="delete()">Delete</button>
 
 
+<ul *ngFor="let member of members | async">
+  <li>
+    <strong>{{ member.name }}</strong> {{  member.gender  }}  {{   member.id   }}
+  </li>
+</ul>
+
+
 </ion-content>

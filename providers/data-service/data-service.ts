@@ -74,4 +74,15 @@ pushDataFS(collectionName:string,item:any) {
   }
 
 
+  deleteDocument(collectionName:string, docID:string) {
+    this.itemsCollection = this.afs.collection<any>(collectionName);
+    this.itemsCollection.doc(docID).delete();    
+  }
+
+  updateDocument(collectionName:string, docID:string,item:any) {
+    this.itemsCollection = this.afs.collection<any>(collectionName);
+    this.itemsCollection.doc(docID).update(item.getData());
+  }
+
+
 }

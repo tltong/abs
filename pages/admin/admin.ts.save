@@ -15,8 +15,8 @@ import { Member } from '../../utils/member'
 export class AdminPage {
 
   tb_name:string;
-
-
+  tb_field:string;
+  tb_value:string;
   id:string;
   collectionName:string;    
 
@@ -26,25 +26,6 @@ export class AdminPage {
   ,public ds:DataServiceProvider,public ps:PhoneServiceProvider) {
     this.collectionName = "abs-members";
   }
-
-  update () {
-    var members:Observable<any[]>;
-    var member:Member;
-    members = this.ds.pullDataSnapshotChangesFSSimpleQuery(this.collectionName,"name",this.tb_name);
-    members.subscribe(queriedItems => {
-      if (queriedItems.length > 0) {
-        this.id = queriedItems[0].id;
-//        this.ds.deleteDocument(this.collectionName,this.id);
-      }else {
-        this.id = "not found";
-      }
-   });
-
-
-  }
-
-
-
 
   delete() {
 
@@ -58,6 +39,26 @@ export class AdminPage {
         this.id = "not found";
       }
    });
+  }
+
+  update() {
+
+    var members:Observable<any[]>;
+    var member:
+    members = this.ds.pullDataSnapshotChangesFSSimpleQuery(this.collectionName,"name",this.tb_name);
+    members.subscribe(queriedItems => {
+      if (queriedItems.length > 0) {
+        this.id = queriedItems[0].id;
+        
+  
+     
+
+        this.ds.deleteDocument(this.collectionName,this.id);
+      }else {
+        this.id = "not found";
+      }
+   });
+  }
 
   }
 

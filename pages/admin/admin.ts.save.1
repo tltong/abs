@@ -33,6 +33,7 @@ export class AdminPage {
     members = this.ds.pullDataSnapshotChangesFSSimpleQuery(this.collectionName,"name",this.tb_name);
     members.subscribe(queriedItems => {
       if (queriedItems.length > 0) {
+        member = new Member(this.tb_name,this.gender,this.japnative,this.organiser);
         this.id = queriedItems[0].id;
 //        this.ds.deleteDocument(this.collectionName,this.id);
       }else {

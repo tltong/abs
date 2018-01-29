@@ -16,8 +16,19 @@
     <ion-input type="text" [(ngModel)]="tb_name"></ion-input>
 </ion-item>
 
-<button ion-button (click)="delete()">Delete</button>
+<ion-item>
+    <ion-label floating>Field Name</ion-label>
+    <ion-input type="text" [(ngModel)]="tb_field"></ion-input>
+</ion-item>
 
+<ion-item>
+    <ion-label floating>Value</ion-label>
+    <ion-input type="text" [(ngModel)]="tb_value"></ion-input>
+</ion-item>
+
+
+<button ion-button (click)="delete()">Delete</button>
+<button ion-button (click)="update()">Update</button>
 
 <ul *ngFor="let member of members | async">
   <li>

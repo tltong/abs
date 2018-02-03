@@ -23,7 +23,7 @@ export class DataServiceProvider {
   }
 
 
-
+   
 
   updateDataBatchFBFS(collectionName:string,items:Array<any>){
     var i:number;
@@ -52,9 +52,10 @@ pushDataFBFS(collectionName:string,item:any) {
 
 
 pushDataFS(collectionName:string,item:any) {
-    var itemsCollection: AngularFirestoreCollection<any>;
-    itemsCollection = this.afs.collection<any>(collectionName);
-    itemsCollection.add(item.getData()).then(); 
+    
+    this.itemsCollection = this.afs.collection<any>(collectionName);
+    //this.itemsCollection.add({ singer: "the corr", name: "runaway" });
+    this.itemsCollection.add(item.getData()); 
   }
 
   pullDataFS(collectionName:string):Observable<any[]> {
@@ -129,11 +130,6 @@ pushDataFS(collectionName:string,item:any) {
       }
   }
 */
-
-
-
-
-
   deleteDocument(collectionName:string, docID:string) {
     this.itemsCollection = this.afs.collection<any>(collectionName);
     this.itemsCollection.doc(docID).delete();    

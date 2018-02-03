@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
@@ -17,10 +18,13 @@ export class AdminPage {
   tb_name:string;
   tb_field:string;
   tb_value:string;
-
+  participantNo:number;
+  organiserNo:number;
+  tb_pplgroup:number;
   id:string;
   collectionName:string;    
-
+  
+  test_string:string;  
   members:Observable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams
@@ -42,15 +46,9 @@ export class AdminPage {
         this.id = "not found";
       }
    });
-
-
   }
 
-
-
-
   delete() {
-
     var members:Observable<any[]>;
     members = this.ds.pullDataSnapshotChangesFSSimpleQuery(this.collectionName,"name",this.tb_name);
     members.subscribe(queriedItems => {
@@ -61,11 +59,62 @@ export class AdminPage {
         this.id = "not found";
       }
    });
-
   }
+
+  test() {
+    var member:Member;
+    member = new Member("KK","male","no","no");    
+    this.ds.pushDataFBFS("abs-member2",member);
+  
+  }
+
+  
+  refresh() {
+    var members:Observable<any[]>;
+    var member:Member;
+    var i:number=0;
+    var pplgroup_count=1;
+    var memberArray:Member[];
+    
+    this.participantNo=0;
+    this.organiserNo=0;
+    var update=1;   
+
+    members = this.ds.pullDataSnapshotChangesFS(this.collectionName);
+
+    members.subscribe(
+
+      queriedItems => {   
+
+      if (update==1)
+      {
+
+      this.participantNo=0;
+      this.organiserNo=0;
+ 
+      for (i=0;i<queriedItems.length;i++) {
+        this.participantNo++;
+        if (queriedItems[i].organiser=="yes"){
+          this.organiserNo++;
+          member = new Member(queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative
+          ,queriedItems[i].organiser);
+          member.update("groupID",String(pplgroup_count));
+          this.ds.updateDocument(this.collectionName,queriedItems[i].id,member);
+          pplgroup_count++;
+          if (pplgroup_count>this.tb_pplgroup){   pplgroup_count=1;  }
+       
+       } // if
+      } // for loop
+     update=0;
+     }
+     } // queriedItems
+     ); // subscribe
+  }
+
 
   ionViewDidLoad() {
     this.members=this.ds.pullDataSnapshotChangesFS(this.collectionName);
   }
+
 
 }

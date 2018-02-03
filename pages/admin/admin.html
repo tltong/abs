@@ -9,7 +9,16 @@
 
 <ion-content padding>
 
+Test string : {{ test_string }}
+<br>
 {{id}}
+<br>
+Number of participants : {{participantNo}}
+<br>
+Number of organisers : {{organiserNo}}
+<br>
+Number per group : {{tb_pplgroup}}
+<br>
 
 <ion-item>
     <ion-label floating>Name</ion-label>
@@ -29,10 +38,20 @@
 
 <button ion-button (click)="delete()">Delete</button>
 <button ion-button (click)="update()">Update</button>
+<br>
+<br>
+
+<ion-item>
+    <ion-label floating>People per group</ion-label>
+    <ion-input type="text" [(ngModel)]="tb_pplgroup"></ion-input>
+</ion-item>
+<button ion-button (click)="refresh()">Refresh</button>
+<button ion-button (click)="test()">Test</button>
 
 <ul *ngFor="let member of members | async">
   <li>
-    <strong>{{ member.name }}</strong> {{  member.gender  }}  {{   member.id   }}
+    <strong>{{ member.name }}</strong> {{  member.gender  }}    Japanese:{{ member.japnative}} Organiser:{{ member.organiser   }}
+    Group:{{ member.groupID }}   
   </li>
 </ul>
 

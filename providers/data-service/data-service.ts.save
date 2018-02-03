@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import firebase from 'firebase';
-import 'firebase/firestore';
 import { PhoneServiceProvider } from '../../providers/phone-service/phone-service';
 
 import { AngularFireModule } from 'angularfire2';
@@ -22,39 +20,11 @@ export class DataServiceProvider {
   constructor(private afs: AngularFirestore,public ps:PhoneServiceProvider) {
   }
 
-
-
-
-  updateDataBatchFBFS(collectionName:string,items:Array<any>){
-    var i:number;
-    var sfRef;
-    var db = firebase.firestore();    
-    var batch = db.batch();
-    for (i=0;i<items.length;i++){
-      sfRef = db.collection(collectionName).doc(items[i].docID);
-      batch.update(sfRef,items[i].getData());      
-    }
-    batch.commit().then();
-  }
-
-
-
-
-pushDataFBFS(collectionName:string,item:any) {
-  var db = firebase.firestore();
-  db.collection(collectionName).add(item.getData()).then( (docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch( (error) => {
-        console.error("Error adding document: ", error);
-      });
-}
-
-
 pushDataFS(collectionName:string,item:any) {
-    var itemsCollection: AngularFirestoreCollection<any>;
-    itemsCollection = this.afs.collection<any>(collectionName);
-    itemsCollection.add(item.getData()).then(); 
+    
+    this.itemsCollection = this.afs.collection<any>(collectionName);
+    //this.itemsCollection.add({ singer: "the corr", name: "runaway" });
+    this.itemsCollection.add(item.getData()); 
   }
 
   pullDataFS(collectionName:string):Observable<any[]> {
@@ -106,8 +76,8 @@ pushDataFS(collectionName:string,item:any) {
     });
     return items;
   }
-/*
-  updateAllDocuments(collectionName:string,memberArray:Array ) {
+
+  deleteAllDocuments(collectionName:string,memberArray:Array ) {
  
     var itemsCollection: AngularFirestoreCollection<any>;
     var members:Observable<any[]>;
@@ -128,11 +98,6 @@ pushDataFS(collectionName:string,item:any) {
        this.pushDataFS(collectionName,memberArray[i]);
       }
   }
-*/
-
-
-
-
 
   deleteDocument(collectionName:string, docID:string) {
     this.itemsCollection = this.afs.collection<any>(collectionName);

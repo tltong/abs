@@ -26,7 +26,6 @@ export class AddMemberPage {
     member = new Member(this.tb_name,this.gender,this.japnative,this.organiser); 
     this.ds.pushDataFS("abs-members",member);
     this.navCtrl.pop();
-    //this.ps.presentToast(this.gender);
 
   }
 

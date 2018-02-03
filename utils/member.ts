@@ -3,7 +3,8 @@ export class Member {
   gender: string;
   japnative: string;
   organiser: string;
-  groupID:string; 
+  groupID:number; 
+  docID:string;
 
   constructor(name, gender, japnative, organiser){
     this.name=name;
@@ -31,7 +32,11 @@ export class Member {
         break;
       }
       case "groupID": {
-        this.groupID=fieldValue;        
+        this.groupID=Number(fieldValue);        
+        break;
+      }
+      case "docID": {
+        this.docID=fieldValue;
         break;
       }
 

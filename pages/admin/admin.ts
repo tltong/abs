@@ -18,7 +18,6 @@ export class AdminPage {
   tb_name:string;
   tb_field:string;
   tb_value:string;
-  participantNo:number;
   organiserNo:number;
   tb_pplgroup:number;
   id:string;
@@ -65,51 +64,85 @@ export class AdminPage {
     var members:Observable<any[]>;
     var member:Member;
     var i:number=0;
-    var pplgroup_count=1;
     var memberArray:Member[];
     
     this.participantNo=0;
-    this.organiserNo=0;
     var update=1;   
 
     members = this.ds.pullDataSnapshotChangesFS(this.collectionName);
-
     members.subscribe(
-
       queriedItems => {   
-
         if (update==1)
         {
-          this.participantNo=0;
-          this.organiserNo=0;
+          this.pplgroup_count=1;
+  /*
+        // assign organisers
           memberArray = new Array();
           for (i=0;i<queriedItems.length;i++) {
-            this.participantNo++;
-              if (queriedItems[i].organiser=="yes"){
-                this.organiserNo++;
-                member = new Member(queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative
-                ,queriedItems[i].organiser);
-                member.update("docID",queriedItems[i].id);
-                memberArray.push(member);
-                pplgroup_count++;
-                if (pplgroup_count>this.tb_pplgroup){   pplgroup_count=1;  }
-              } // if
+            if (queriedItems[i].organiser=="yes"){
+              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+            } // if
           } // for loop
-          update=0;
-          pplgroup_count=1;     
-          memberArray = this.ds.randomiseArray(memberArray);
-          for (i=0;i<memberArray.length;i++){
-            memberArray[i].update("groupID",String(pplgroup_count));
-            this.ds.updateDocument(this.collectionName,memberArray[i].docID,memberArray[i]);
-            pplgroup_count++;
-            if (pplgroup_count>this.tb_pplgroup){   pplgroup_count=1;  }
-          }
-        }
+         this.assignGroupID(this.collectionName,memberArray);
+*/
+          // assign female japnative
+          memberArray = new Array();
+          for (i=0;i<queriedItems.length;i++) {
+            if (queriedItems[i].gender=="female" && queriedItems[i].japnative=="yes"){
+              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+            } // if
+          } // for loop
+          this.assignGroupID(this.collectionName,memberArray);
+
+         // assign female local
+          memberArray = new Array();
+          for (i=0;i<queriedItems.length;i++) {
+            if (queriedItems[i].gender=="female" && queriedItems[i].japnative=="no"){
+              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+            } // if
+          } // for loop
+          this.assignGroupID(this.collectionName,memberArray);
+
+         // assign male japanese
+          memberArray = new Array();
+          for (i=0;i<queriedItems.length;i++) {
+            if (queriedItems[i].gender=="male" && queriedItems[i].japnative=="yes"){
+              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+            } // if
+          } // for loop
+          this.assignGroupID(this.collectionName,memberArray);
+
+         // assign male local 
+          memberArray = new Array();
+          for (i=0;i<queriedItems.length;i++) {
+            if (queriedItems[i].gender=="male" && queriedItems[i].japnative=="no"){
+              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+            } // if
+          } // for loop
+          this.assignGroupID(this.collectionName,memberArray);
+
+        update=0;   
+        } // if update
       } // queriedItems
     ); // subscribe
   } //refresh()
 
+  addMember(memberArray:Array<any>,name,gender,japnative,organiser,docID) {
+    var member = new Member(name,gender,japnative,organiser);
+    member.update("docID",docID);
+    memberArray.push(member);
+  }
 
+  private assignGroupID(collectionName:string,memberArray:Array<any>) {
+    memberArray = this.ds.randomiseArray(memberArray);
+    for (var i=0;i<memberArray.length;i++){
+      memberArray[i].setgroupID(this.pplgroup_count);
+      this.ds.updateDocument(collectionName,memberArray[i].docID,memberArray[i]);
+      this.pplgroup_count++;
+      if (this.pplgroup_count>this.tb_pplgroup){   this.pplgroup_count=1;  }
+    }
+//    this.test_string="name:" + memberArray[0].name + "group id:" + memberArray[0].groupID;
+  } // assignGroupID
 
   ionViewDidLoad() {
     this.members=this.ds.pullDataSnapshotChangesFS(this.collectionName);

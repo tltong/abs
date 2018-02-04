@@ -11,14 +11,6 @@
 
 Test string : {{ test_string }}
 <br>
-{{id}}
-<br>
-Number of participants : {{participantNo}}
-<br>
-Number of organisers : {{organiserNo}}
-<br>
-Number per group : {{tb_pplgroup}}
-<br>
 
 <ion-item>
     <ion-label floating>Name</ion-label>
@@ -47,13 +39,13 @@ Number per group : {{tb_pplgroup}}
 </ion-item>
 <button ion-button (click)="refresh()">Refresh</button>
 <button ion-button (click)="test()">Test</button>
-
-<ul *ngFor="let member of members | async">
+<br><br>
+Total : {{(members | async)?.length}} <br>
+<ul *ngFor="let member of members | async ">
   <li>
     <strong>{{ member.name }}</strong> {{  member.gender  }}    Japanese:{{ member.japnative}} Organiser:{{ member.organiser   }}
     Group:{{ member.groupID }}   
   </li>
 </ul>
-
 
 </ion-content>

@@ -13,6 +13,10 @@ export class Member {
     this.organiser=organiser;
   }
 
+  setgroupID(id:number) {
+    this.groupID=id;
+  }
+
   update(fieldName:string, fieldValue:string) {
     switch(fieldName) {
       case "name": {
@@ -29,10 +33,6 @@ export class Member {
       }
       case "organiser": {
         this.organiser==fieldValue;
-        break;
-      }
-      case "groupID": {
-        this.groupID=Number(fieldValue);        
         break;
       }
       case "docID": {

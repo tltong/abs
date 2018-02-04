@@ -22,7 +22,35 @@ export class DataServiceProvider {
   constructor(private afs: AngularFirestore,public ps:PhoneServiceProvider) {
   }
 
+  randomiseArray(inArray:Array<any>):Array<any> {
 
+    if (inArray.length <= 1) return inArray;
+
+    var currentIndex = inArray.length, temporaryValue, randomIndex ;
+/*
+    for (let i = 0; i < inArray.length; i++) {
+    const randomChoiceIndex = Math.floor(Math.random()*((inArray.length - 1)-(i+1))+i);
+    [inArray[i], inArray[randomChoiceIndex]] = [inArray[randomChoiceIndex], inArray[i]];
+    }
+*/
+
+    while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = inArray[currentIndex];
+    inArray[currentIndex] = inArray[randomIndex];
+    inArray[randomIndex] = temporaryValue;
+    } 
+
+
+
+   return inArray;
+    
+  }
 
 
   updateDataBatchFBFS(collectionName:string,items:Array<any>){

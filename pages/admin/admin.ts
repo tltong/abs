@@ -59,16 +59,8 @@ export class AdminPage {
         this.id = "not found";
       }
    });
-  }
+  } // delete()
 
-  test() {
-    var member:Member;
-    member = new Member("KK","male","no","no");    
-    this.ds.pushDataFBFS("abs-member2",member);
-  
-  }
-
-  
   refresh() {
     var members:Observable<any[]>;
     var member:Member;
@@ -86,30 +78,37 @@ export class AdminPage {
 
       queriedItems => {   
 
-      if (update==1)
-      {
+        if (update==1)
+        {
+          this.participantNo=0;
+          this.organiserNo=0;
+          memberArray = new Array();
+          for (i=0;i<queriedItems.length;i++) {
+            this.participantNo++;
+              if (queriedItems[i].organiser=="yes"){
+                this.organiserNo++;
+                member = new Member(queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative
+                ,queriedItems[i].organiser);
+                member.update("docID",queriedItems[i].id);
+                memberArray.push(member);
+                pplgroup_count++;
+                if (pplgroup_count>this.tb_pplgroup){   pplgroup_count=1;  }
+              } // if
+          } // for loop
+          update=0;
+          pplgroup_count=1;     
+          memberArray = this.ds.randomiseArray(memberArray);
+          for (i=0;i<memberArray.length;i++){
+            memberArray[i].update("groupID",String(pplgroup_count));
+            this.ds.updateDocument(this.collectionName,memberArray[i].docID,memberArray[i]);
+            pplgroup_count++;
+            if (pplgroup_count>this.tb_pplgroup){   pplgroup_count=1;  }
+          }
+        }
+      } // queriedItems
+    ); // subscribe
+  } //refresh()
 
-      this.participantNo=0;
-      this.organiserNo=0;
- 
-      for (i=0;i<queriedItems.length;i++) {
-        this.participantNo++;
-        if (queriedItems[i].organiser=="yes"){
-          this.organiserNo++;
-          member = new Member(queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative
-          ,queriedItems[i].organiser);
-          member.update("groupID",String(pplgroup_count));
-          this.ds.updateDocument(this.collectionName,queriedItems[i].id,member);
-          pplgroup_count++;
-          if (pplgroup_count>this.tb_pplgroup){   pplgroup_count=1;  }
-       
-       } // if
-      } // for loop
-     update=0;
-     }
-     } // queriedItems
-     ); // subscribe
-  }
 
 
   ionViewDidLoad() {

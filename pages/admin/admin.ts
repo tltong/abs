@@ -22,7 +22,7 @@ export class AdminPage {
   tb_pplgroup:number;
   id:string;
   collectionName:string;    
-  
+  pplgroup_count:number;  
   test_string:string;  
   members:Observable<any[]>;
 
@@ -66,7 +66,6 @@ export class AdminPage {
     var i:number=0;
     var memberArray:Member[];
     
-    this.participantNo=0;
     var update=1;   
 
     members = this.ds.pullDataSnapshotChangesFS(this.collectionName);

@@ -11,11 +11,48 @@
 
 <br><br>
 <p>Tell us about yourself</p>
+
+   
+    <form [formGroup]="memberForm"  (ngSubmit)="formSubmit()">
+ 
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select formControlName="gender">
+            <ion-option value="female">Female</ion-option>
+            <ion-option value="male">Male</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Native Japanese</ion-label>
+          <ion-select formControlName="japnative">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Orgnaiser</ion-label>
+          <ion-select formControlName="organiser">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <button ion-button [disabled]="!memberForm.valid" type="submit">Submit</button>
+  </form>
+
+<br><br><br>
+
 <ion-item>
     <ion-label floating>Name</ion-label>
     <ion-input type="text" [(ngModel)]="tb_name"></ion-input>
 </ion-item>
-
 
 <ion-item>
     <ion-label>Gender</ion-label>

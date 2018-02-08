@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { PhoneServiceProvider } from '../../providers/phone-service/phone-service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Member } from '../../utils/member'
 
@@ -16,10 +17,27 @@ export class AddMemberPage {
   gender: string;
   japnative: string;
   organiser: string;
+
+  memberForm: FormGroup;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public ps:PhoneServiceProvider
-  ,public ds:DataServiceProvider) {
+  ,public ds:DataServiceProvider,public formBuilder: FormBuilder) {
+
+    this.memberForm = formBuilder.group({
+      name: ['', Validators.compose([Validators.required])],
+      gender: ['',Validators.compose([Validators.required])],
+      japnative: ['',Validators.compose([Validators.required])],
+      organiser: ['',Validators.compose([Validators.required])]
+    });
+
+
   }
+
+  formSubmit(){
+
+
+  }
+
 
   submit() {
     var member: Member;
@@ -30,6 +48,8 @@ export class AddMemberPage {
   }
 
   ionViewDidLoad() {
+
+
     console.log('ionViewDidLoad AddMemberPage');
   }
 

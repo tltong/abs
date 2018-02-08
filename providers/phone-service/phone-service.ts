@@ -10,42 +10,6 @@ export class PhoneServiceProvider {
 
   }
 
-  //prompt
-presentPrompt(inTitle,inUsername,inPassword,
-verifyPW:(inPassword:string)=>boolean):boolean {
-  let alert = this.alertCtrl.create({
-    title: inTitle,
-    inputs: [
-      {
-        name: 'username',
-        placeholder: 'Username'
-      },
-      {
-        name: 'password',
-        placeholder: 'Password',
-        type: 'password'
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Login',
-        handler: data => {
-        return verifyPW(data.password);
-        }
-      }
-    ]
-  });
-  alert.present();
-}
-
-
 
   // Toast
   presentToast(msg:string) {

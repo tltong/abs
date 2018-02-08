@@ -26,6 +26,7 @@
     <ion-input type="text" [(ngModel)]="tb_value"></ion-input>
 </ion-item>
 
+
 <button ion-button (click)="delete()">Delete</button>
 <button ion-button (click)="update()">Update</button>
 <br>
@@ -36,16 +37,13 @@
     <ion-input type="text" [(ngModel)]="tb_pplgroup"></ion-input>
 </ion-item>
 <button ion-button (click)="refresh()">Refresh</button>
-<button ion-button (click)="test()">Test</button>
 <br><br>
 Total : {{(membersDisplay)?.length}} <br>
-
-<ul *ngFor="let member of membersDisplay" >
+<ul *ngFor="let member of membersDisplay">
   <li>
-    <strong>{{ member.name | lowercase }}</strong> {{  member.gender  }}    Japanese:{{ member.japnative}} Organiser:{{ member.organiser   }}
+    <strong>{{ member.name }}</strong> {{  member.gender  }}    Japanese:{{ member.japnative}} Organiser:{{ member.organiser   }}
     Group:{{ member.groupID }}   
   </li>
 </ul>
-
 
 </ion-content>

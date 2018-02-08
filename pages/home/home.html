@@ -7,16 +7,23 @@
 </ion-header>
 
 <ion-content padding>
-  Welcome!
-
-
-  <button ion-button block clear (click)="goToAddMemberPage()">
-     Add Member
+  Welcome to 飲みニケション {{date | date:'mediumDate' }}
+<br><br>
+Auth status : {{ auth_status }}
+  <button ion-button block (click)="goToAddMemberPage()">
+     Member registration
   </button>
-
-
-  <button ion-button block clear (click)="goToAdminPage()">
+  <button ion-button block (click)="goToAdminPage()">
      Admin
   </button>
+
+<br><br>
+Total attendees : {{(membersDisplay)?.length}} <br>
+<ul *ngFor="let member of membersDisplay" >
+  <li>
+    <strong>{{ member.name }}</strong> --->  Group:{{ member.groupID }}
+  </li>
+</ul>
+
 
 </ion-content>

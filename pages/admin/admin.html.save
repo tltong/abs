@@ -9,6 +9,7 @@
 
 <ion-content padding>
 
+Test string : {{ test_string | uppercase }}
 <br>
 
 <ion-item>

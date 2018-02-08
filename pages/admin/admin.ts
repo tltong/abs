@@ -25,6 +25,9 @@ export class AdminPage {
   pplgroup_count:number;  
   test_string:string;  
   members:Observable<any[]>;
+  membersDisplay:Array<any>;
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams
   ,public ds:DataServiceProvider,public ps:PhoneServiceProvider) {
@@ -71,6 +74,8 @@ export class AdminPage {
     members = this.ds.pullDataSnapshotChangesFS(this.collectionName);
     members.subscribe(
       queriedItems => {   
+
+//        this.membersDisplay = this.ds.sortArray(queriedItems,"groupID");
         if (update==1)
         {
           this.pplgroup_count=1;
@@ -145,7 +150,10 @@ export class AdminPage {
 
   ionViewDidLoad() {
     this.members=this.ds.pullDataSnapshotChangesFS(this.collectionName);
+    this.members.subscribe(queriedItems => {
+      if (queriedItems.length > 0) {
+        this.membersDisplay = this.ds.sortArray(queriedItems,"groupID");
+      }
+      });
   }
-
-
 }

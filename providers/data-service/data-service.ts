@@ -22,17 +22,27 @@ export class DataServiceProvider {
   constructor(private afs: AngularFirestore,public ps:PhoneServiceProvider) {
   }
 
+  private dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+  }
+
+  sortArray(inArray:Array<any>,property:string):Array<any> {
+    return inArray.sort(this.dynamicSort(property));
+  }
+  
   randomiseArray(inArray:Array<any>):Array<any> {
 
     if (inArray.length <= 1) return inArray;
 
     var currentIndex = inArray.length, temporaryValue, randomIndex ;
-/*
-    for (let i = 0; i < inArray.length; i++) {
-    const randomChoiceIndex = Math.floor(Math.random()*((inArray.length - 1)-(i+1))+i);
-    [inArray[i], inArray[randomChoiceIndex]] = [inArray[randomChoiceIndex], inArray[i]];
-    }
-*/
 
     while (0 !== currentIndex) {
 

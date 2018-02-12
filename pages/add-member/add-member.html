@@ -12,7 +12,7 @@
 <br><br>
 <p>Tell us about yourself</p>
 
-   
+{{test_string}}   
     <form [formGroup]="memberForm"  (ngSubmit)="formSubmit()">
  
         <ion-item>
@@ -37,12 +37,34 @@
         </ion-item>
 
         <ion-item>
+          <ion-label>Fluent in Japanese</ion-label>
+          <ion-select formControlName="fluentjapanese">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fluent in English</ion-label>
+          <ion-select formControlName="fluentenglish">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
           <ion-label>Orgnaiser</ion-label>
           <ion-select formControlName="organiser">
             <ion-option value="yes">Yes</ion-option>
             <ion-option value="no">No</ion-option>
           </ion-select>
         </ion-item>
+
+        <ion-item>
+            <ion-label floating>Hobby</ion-label>
+            <ion-input formControlName="hobby" type="text"></ion-input>
+        </ion-item>
+
 
         <button ion-button [disabled]="!memberForm.valid" type="submit">Submit</button>
   </form>

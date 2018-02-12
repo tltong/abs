@@ -17,7 +17,7 @@ export class AddMemberPage {
   gender: string;
   japnative: string;
   organiser: string;
-
+  test_string;
   memberForm: FormGroup;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public ps:PhoneServiceProvider
@@ -27,7 +27,10 @@ export class AddMemberPage {
       name: ['', Validators.compose([Validators.required])],
       gender: ['',Validators.compose([Validators.required])],
       japnative: ['',Validators.compose([Validators.required])],
-      organiser: ['',Validators.compose([Validators.required])]
+      organiser: ['',Validators.compose([Validators.required])],
+      fluentjapanese: ['',Validators.compose([Validators.required])],
+      fluentenglish: ['',Validators.compose([Validators.required])],
+      hobby: ['',Validators.compose([Validators.required])]
     });
 
 
@@ -35,7 +38,17 @@ export class AddMemberPage {
 
   formSubmit(){
 
+   this.test_string = this.memberForm.value.name+this.memberForm.value.gender+this.memberForm.value.japnative+this.memberForm.value.organiser;
 
+
+    var member: Member;
+    member = new Member(this.memberForm.value.name,this.memberForm.value.gender,this.memberForm.value.japnative,this.memberForm.value.organiser); 
+//    this.ds.pushDataFS("abs-members",member);
+
+    this.memberForm.reset();
+
+
+//    this.navCtrl.pop();
   }
 
 

@@ -38,12 +38,14 @@ export class AddMemberPage {
 
   formSubmit(){
 
-   this.test_string = this.memberForm.value.name+this.memberForm.value.gender+this.memberForm.value.japnative+this.memberForm.value.organiser;
+//   this.test_string = this.memberForm.value.name+this.memberForm.value.gender+this.memberForm.value.japnative+this.memberForm.value.organiser;
 
 
     var member: Member;
-    member = new Member(this.memberForm.value.name,this.memberForm.value.gender,this.memberForm.value.japnative,this.memberForm.value.organiser); 
-//    this.ds.pushDataFS("abs-members",member);
+    member = new Member(this.memberForm.value.name,this.memberForm.value.gender,
+                        this.memberForm.value.japnative,this.memberForm.value.organiser,
+                        this.memberForm.value.fluentjapanese,this.memberForm.value.fluentenglish,this.memberForm.value.hobby); 
+    this.ds.pushDataFS("abs-members",member);
 
     this.memberForm.reset();
 

@@ -3,14 +3,21 @@ export class Member {
   gender: string;
   japnative: string;
   organiser: string;
+  fluentjapanese: string;
+  fluentenglish: string;
+  hobby: string;
   groupID:number; 
   docID:string;
 
-  constructor(name, gender, japnative, organiser){
+  constructor(name, gender, japnative, organiser, fluentjapanese, fluentenglish, hobby){
     this.name=name;
     this.gender=gender;    
     this.japnative=japnative;
     this.organiser=organiser;
+    this.fluentjapanese=fluentjapanese;
+    this.fluentenglish=fluentenglish;
+    this.hobby=hobby;
+
   }
 
   setgroupID(id:number) {

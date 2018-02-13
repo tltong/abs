@@ -11,6 +11,17 @@
 
 <br>
 
+    <form [formGroup]="memberForm"  (ngSubmit)="formSubmit()">
+ 
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+
+        <button ion-button [disabled]="!memberForm.valid" type="submit">Submit</button>
+  </form>
+
+
 <ion-item>
     <ion-label floating>Name</ion-label>
     <ion-input type="text" [(ngModel)]="tb_name"></ion-input>
@@ -39,7 +50,7 @@
 <button ion-button (click)="refresh()">Refresh</button>
 <br><br>
 Total : {{(membersDisplay)?.length}} <br>
-<ul *ngFor="let member of membersDisplay">
+<ul *ngFor="let member of membersDisplay" (click)="showMember(member.name)">
   <li>
     <strong>{{ member.name }}</strong> {{  member.gender  }}    Japanese:{{ member.japnative}} Organiser:{{ member.organiser   }}
     Group:{{ member.groupID }}   

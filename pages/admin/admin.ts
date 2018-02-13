@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { PhoneServiceProvider } from '../../providers/phone-service/phone-service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Member } from '../../utils/member'
 
@@ -27,12 +28,36 @@ export class AdminPage {
   members:Observable<any[]>;
   membersDisplay:Array<any>;
 
+  memberForm: FormGroup;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams
-  ,public ds:DataServiceProvider,public ps:PhoneServiceProvider) {
+  ,public ds:DataServiceProvider,public ps:PhoneServiceProvider,public formBuilder: FormBuilder) {
     this.collectionName = "abs-members";
+
+    this.memberForm = formBuilder.group({
+      name: ['', Validators.compose([Validators.required])],
+      gender: ['',Validators.compose([Validators.required])],
+      japnative: ['',Validators.compose([Validators.required])],
+      organiser: ['',Validators.compose([Validators.required])],
+      fluentjapanese: ['',Validators.compose([Validators.required])],
+      fluentenglish: ['',Validators.compose([Validators.required])],
+      hobby: ['',Validators.compose([Validators.required])]
+    });
   }
+
+
+  showMember(name:string) {
+//    this.ps.presentToast(name);
+    this.memberForm.get('name').setValue(name);    
+
+  }
+
+
+  formSubmit() {
+
+  }
+
 
   update () {
     var members:Observable<any[]>;

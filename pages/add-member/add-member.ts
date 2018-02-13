@@ -54,13 +54,6 @@ export class AddMemberPage {
   }
 
 
-  submit() {
-    var member: Member;
-    member = new Member(this.tb_name,this.gender,this.japnative,this.organiser); 
-    this.ds.pushDataFS("abs-members",member);
-    this.navCtrl.pop();
-
-  }
 
   ionViewDidLoad() {
 

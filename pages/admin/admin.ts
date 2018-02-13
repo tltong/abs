@@ -42,15 +42,27 @@ export class AdminPage {
       organiser: ['',Validators.compose([Validators.required])],
       fluentjapanese: ['',Validators.compose([Validators.required])],
       fluentenglish: ['',Validators.compose([Validators.required])],
-      hobby: ['',Validators.compose([Validators.required])]
+      hobby: ['',Validators.compose([Validators.required])],
+      groupID: [''],
+      docID: ['',Validators.compose([Validators.required])]
+
     });
   }
 
 
-  showMember(name:string) {
-//    this.ps.presentToast(name);
-    this.memberForm.get('name').setValue(name);    
+  showMember(name:string,gender:string,japnative:string,organiser:string,fluentjapanese,fluentenglish,hobby,groupID,docID) {
+//    this.ps.presentToast(name+gender+organiser);
 
+    this.memberForm.reset();
+    this.memberForm.get('name').setValue(name);    
+    this.memberForm.get('gender').setValue(gender);
+    this.memberForm.get('japnative').setValue(japnative);
+    this.memberForm.get('organiser').setValue(organiser);
+    this.memberForm.get('fluentjapanese').setValue(fluentjapanese);
+    this.memberForm.get('fluentenglish').setValue(fluentenglish);
+    this.memberForm.get('hobby').setValue(hobby);
+    this.memberForm.get('groupID').setValue(groupID);
+    this.memberForm.get('docID').setValue(docID);
   }
 
 
@@ -58,7 +70,7 @@ export class AdminPage {
 
   }
 
-
+/*
   update () {
     var members:Observable<any[]>;
     var member:Member;
@@ -74,6 +86,7 @@ export class AdminPage {
       }
    });
   }
+*/
 
   delete() {
     var members:Observable<any[]>;
@@ -118,7 +131,10 @@ export class AdminPage {
           memberArray = new Array();
           for (i=0;i<queriedItems.length;i++) {
             if (queriedItems[i].gender=="female" && queriedItems[i].japnative=="yes"){
-              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+             this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,
+                             queriedItems[i].japnative,queriedItems[i].organiser,
+                             queriedItems[i].fluentjapanese,queriedItems[i].fluentenglish,queriedItems[i].hobby,
+                             queriedItems[i].id);
             } // if
           } // for loop
           this.assignGroupID(this.collectionName,memberArray);
@@ -127,7 +143,10 @@ export class AdminPage {
           memberArray = new Array();
           for (i=0;i<queriedItems.length;i++) {
             if (queriedItems[i].gender=="female" && queriedItems[i].japnative=="no"){
-              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+             this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,
+                             queriedItems[i].japnative,queriedItems[i].organiser,
+                             queriedItems[i].fluentjapanese,queriedItems[i].fluentenglish,queriedItems[i].hobby,
+                             queriedItems[i].id);
             } // if
           } // for loop
           this.assignGroupID(this.collectionName,memberArray);
@@ -136,7 +155,10 @@ export class AdminPage {
           memberArray = new Array();
           for (i=0;i<queriedItems.length;i++) {
             if (queriedItems[i].gender=="male" && queriedItems[i].japnative=="yes"){
-              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,
+                             queriedItems[i].japnative,queriedItems[i].organiser,
+                             queriedItems[i].fluentjapanese,queriedItems[i].fluentenglish,queriedItems[i].hobby,
+                             queriedItems[i].id);
             } // if
           } // for loop
           this.assignGroupID(this.collectionName,memberArray);
@@ -145,7 +167,10 @@ export class AdminPage {
           memberArray = new Array();
           for (i=0;i<queriedItems.length;i++) {
             if (queriedItems[i].gender=="male" && queriedItems[i].japnative=="no"){
-              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,queriedItems[i].japnative,queriedItems[i].organiser,queriedItems[i].id);
+              this.addMember(memberArray,queriedItems[i].name,queriedItems[i].gender,
+                             queriedItems[i].japnative,queriedItems[i].organiser,
+                             queriedItems[i].fluentjapanese,queriedItems[i].fluentenglish,queriedItems[i].hobby,
+                             queriedItems[i].id);
             } // if
           } // for loop
           this.assignGroupID(this.collectionName,memberArray);
@@ -156,8 +181,8 @@ export class AdminPage {
     ); // subscribe
   } //refresh()
 
-  addMember(memberArray:Array<any>,name,gender,japnative,organiser,docID) {
-    var member = new Member(name,gender,japnative,organiser);
+  addMember(memberArray:Array<any>,name,gender,japnative,organiser,fluentjapanese,fluentenglish,hobby,docID) {
+    var member = new Member(name,gender,japnative,organiser,fluentjapanese,fluentenglish,hobby);
     member.update("docID",docID);
     memberArray.push(member);
   }

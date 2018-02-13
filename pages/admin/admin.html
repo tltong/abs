@@ -18,6 +18,62 @@
             <ion-input formControlName="name" type="text"></ion-input>
         </ion-item>
 
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select formControlName="gender">
+            <ion-option value="female">Female</ion-option>
+            <ion-option value="male">Male</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Native Japanese</ion-label>
+          <ion-select formControlName="japnative">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fluent in Japanese</ion-label>
+          <ion-select formControlName="fluentjapanese">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fluent in English</ion-label>
+          <ion-select formControlName="fluentenglish">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Orgnaiser</ion-label>
+          <ion-select formControlName="organiser">
+            <ion-option value="yes">Yes</ion-option>
+            <ion-option value="no">No</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Hobby</ion-label>
+            <ion-input formControlName="hobby" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Group ID</ion-label>
+            <ion-input formControlName="groupID" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Doc ID</ion-label>
+            <ion-input formControlName="docID" type="text"></ion-input>
+        </ion-item>
+
+
         <button ion-button [disabled]="!memberForm.valid" type="submit">Submit</button>
   </form>
 
@@ -50,7 +106,8 @@
 <button ion-button (click)="refresh()">Refresh</button>
 <br><br>
 Total : {{(membersDisplay)?.length}} <br>
-<ul *ngFor="let member of membersDisplay" (click)="showMember(member.name)">
+<ul *ngFor="let member of membersDisplay" (click)="showMember(member.name,member.gender,member.japnative,member.organiser,
+member.fluentjapanese,member.fluentenglish,member.hobby,member.groupID,member.docID)">
   <li>
     <strong>{{ member.name }}</strong> {{  member.gender  }}    Japanese:{{ member.japnative}} Organiser:{{ member.organiser   }}
     Group:{{ member.groupID }}   

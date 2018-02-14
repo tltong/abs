@@ -45,11 +45,19 @@ export class AddMemberPage {
     member = new Member(this.memberForm.value.name,this.memberForm.value.gender,
                         this.memberForm.value.japnative,this.memberForm.value.organiser,
                         this.memberForm.value.fluentjapanese,this.memberForm.value.fluentenglish,this.memberForm.value.hobby); 
-    this.ds.pushDataFS("abs-members",member);
-
-    this.memberForm.reset();
-
-
+    this.ds.pushDataFSPromise("abs-members",member).then( id => { 
+      member.update('docID',id);
+      this.ds.updateDocument("abs-members",id,member);
+      this.ps.presentAlert("Registration","Thank you "+member.name+"!","Ok");
+      this.memberForm.reset();
+    } );
+/*
+this.ps.presentToast("member added")
+    .then(
+      this.ps.presentToast("member added");
+      this.memberForm.reset();
+    );
+*/
 //    this.navCtrl.pop();
   }
 

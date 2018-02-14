@@ -10,6 +10,15 @@ export class PhoneServiceProvider {
 
   }
 
+  presentAlert(title,subtitle,button) {
+  let alert = this.alertCtrl.create({
+    title: title,
+    subTitle: subtitle,
+    buttons: [button]
+  });
+  alert.present();
+}
+
 
   // Toast
   presentToast(msg:string) {

@@ -21,9 +21,11 @@ export class HomePage {
 
   adminPW:string = "2013";
 
-  constructor(public navCtrl: NavController, public ds:DataServiceProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public ds:DataServiceProvider, public ps:PhoneServiceProvider,
+              private alertCtrl: AlertController) {
 
   }
+
 
   goToAddMemberPage(){
       this.navCtrl.push('AddMemberPage');

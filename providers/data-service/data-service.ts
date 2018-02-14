@@ -89,6 +89,27 @@ pushDataFBFS(collectionName:string,item:any) {
 }
 
 
+
+pushDataFSPromise(collectionName:string,item:any) {
+
+  var promise = new Promise((resolve, reject) => {
+
+  var itemsCollection: AngularFirestoreCollection<any>;
+  itemsCollection = this.afs.collection<any>(collectionName);
+  itemsCollection.add(item.getData()).then(function(docRef) {
+    resolve(docRef.id);
+  })
+  .catch(function(error) {
+    reject(error);
+  });
+ 
+  });
+
+ return promise;
+
+}
+
+
 pushDataFS(collectionName:string,item:any) {
     var itemsCollection: AngularFirestoreCollection<any>;
     itemsCollection = this.afs.collection<any>(collectionName);

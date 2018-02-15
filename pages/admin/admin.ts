@@ -66,8 +66,30 @@ export class AdminPage {
   }
 
 
-  formSubmit() {
+  test() {
+    this.ps.presentConfirm('Alert','Are you sure?').then( ()=> { this.ps.presentToast("ok");  } );
+  }
 
+  formDelete() {
+    this.ps.presentConfirm('Alert','Delete user?').then( ()=> { 
+      this.ds.deleteDocument(this.collectionName,this.memberForm.value.docID);  
+      this.memberForm.reset();
+    } );
+  }
+
+  formSubmit() {
+    this.ps.presentConfirm('Alert','Update member details?').then( ()=> { 
+      var member:Member;
+      member = new Member(this.memberForm.value.name,this.memberForm.value.gender,
+                        this.memberForm.value.japnative,this.memberForm.value.organiser,
+                        this.memberForm.value.fluentjapanese,this.memberForm.value.fluentenglish,this.memberForm.value.hobby);
+
+      if (this.memberForm.value.groupID != null) {
+        member.setgroupID(Number(this.memberForm.value.groupID));
+      }
+      this.ds.updateDocument(this.collectionName,this.memberForm.value.docID,member);
+
+    });
   }
 
 /*

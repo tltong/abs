@@ -46,8 +46,8 @@ export class AddMemberPage {
                         this.memberForm.value.japnative,this.memberForm.value.organiser,
                         this.memberForm.value.fluentjapanese,this.memberForm.value.fluentenglish,this.memberForm.value.hobby); 
     this.ds.pushDataFSPromise("abs-members",member).then( id => { 
-      member.update('docID',id);
-      this.ds.updateDocument("abs-members",id,member);
+      member.update('docID',String(id));
+      this.ds.updateDocument("abs-members",String(id),member);
       this.ps.presentAlert("Registration","Thank you "+member.name+"!","Ok");
       this.memberForm.reset();
     } );

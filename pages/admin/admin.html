@@ -72,9 +72,11 @@
             <ion-label floating>Doc ID</ion-label>
             <ion-input formControlName="docID" type="text"></ion-input>
         </ion-item>
-
-
         <button ion-button [disabled]="!memberForm.valid" type="submit">Submit</button>
+        <button ion-button [disabled]="!memberForm.valid" type="button" (click)="formDelete()">Delete</button>
+
+
+
   </form>
 
 
@@ -96,6 +98,8 @@
 
 <button ion-button (click)="delete()">Delete</button>
 <button ion-button (click)="update()">Update</button>
+<button ion-button (click)="test()">Test</button>
+
 <br>
 <br>
 

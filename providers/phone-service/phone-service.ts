@@ -10,6 +10,48 @@ export class PhoneServiceProvider {
 
   }
 
+
+  presentConfirm(title,message) {
+
+  var promise = new Promise((resolve, reject) => {
+
+  let alert = this.alertCtrl.create({
+    title: title,
+    message: message,
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Ok',
+        handler: () => {
+          resolve();
+
+        }
+      }
+    ]
+  });
+  alert.present();
+
+
+  })
+  .catch(function(error) {
+//    reject(error);
+  });
+ 
+
+ return promise;
+
+
+
+  }
+
+
+
   presentAlert(title,subtitle,button) {
   let alert = this.alertCtrl.create({
     title: title,

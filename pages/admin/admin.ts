@@ -16,10 +16,6 @@ import { Member } from '../../utils/member'
 })
 export class AdminPage {
 
-  tb_name:string;
-  tb_field:string;
-  tb_value:string;
-  organiserNo:number;
   tb_pplgroup:number;
   id:string;
   collectionName:string;    
@@ -51,7 +47,6 @@ export class AdminPage {
 
 
   showMember(name:string,gender:string,japnative:string,organiser:string,fluentjapanese,fluentenglish,hobby,groupID,docID) {
-//    this.ps.presentToast(name+gender+organiser);
 
     this.memberForm.reset();
     this.memberForm.get('name').setValue(name);    
@@ -92,36 +87,6 @@ export class AdminPage {
     });
   }
 
-/*
-  update () {
-    var members:Observable<any[]>;
-    var member:Member;
-    members = this.ds.pullDataSnapshotChangesFSSimpleQuery(this.collectionName,"name",this.tb_name);
-    members.subscribe(queriedItems => {
-      if (queriedItems.length > 0) {
-        this.id = queriedItems[0].id;
-        member = new Member(queriedItems[0].name,queriedItems[0].gender,queriedItems[0].japnative,queriedItems[0].organiser);
-        member.update(this.tb_field,this.tb_value);
-        this.ds.updateDocument(this.collectionName,this.id,member);
-      }else {
-        this.id = "not found";
-      }
-   });
-  }
-*/
-
-  delete() {
-    var members:Observable<any[]>;
-    members = this.ds.pullDataSnapshotChangesFSSimpleQuery(this.collectionName,"name",this.tb_name);
-    members.subscribe(queriedItems => {
-      if (queriedItems.length > 0) {
-        this.id = queriedItems[0].id;
-        this.ds.deleteDocument(this.collectionName,this.id);
-      }else {
-        this.id = "not found";
-      }
-   });
-  } // delete()
 
   refresh() {
     var members:Observable<any[]>;
@@ -135,7 +100,6 @@ export class AdminPage {
     members.subscribe(
       queriedItems => {   
 
-//        this.membersDisplay = this.ds.sortArray(queriedItems,"groupID");
         if (update==1)
         {
           this.pplgroup_count=1;

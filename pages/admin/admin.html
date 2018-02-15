@@ -74,37 +74,11 @@
         </ion-item>
         <button ion-button [disabled]="!memberForm.valid" type="submit">Submit</button>
         <button ion-button [disabled]="!memberForm.valid" type="button" (click)="formDelete()">Delete</button>
-
-
-
   </form>
-
-
-<ion-item>
-    <ion-label floating>Name</ion-label>
-    <ion-input type="text" [(ngModel)]="tb_name"></ion-input>
-</ion-item>
-
-<ion-item>
-    <ion-label floating>Field Name</ion-label>
-    <ion-input type="text" [(ngModel)]="tb_field"></ion-input>
-</ion-item>
-
-<ion-item>
-    <ion-label floating>Value</ion-label>
-    <ion-input type="text" [(ngModel)]="tb_value"></ion-input>
-</ion-item>
-
-
-<button ion-button (click)="delete()">Delete</button>
-<button ion-button (click)="update()">Update</button>
 <button ion-button (click)="test()">Test</button>
 
-<br>
-<br>
-
 <ion-item>
-    <ion-label floating>People per group</ion-label>
+    <ion-label floating>Number of groups</ion-label>
     <ion-input type="text" [(ngModel)]="tb_pplgroup"></ion-input>
 </ion-item>
 <button ion-button (click)="refresh()">Refresh</button>
@@ -113,8 +87,8 @@ Total : {{(membersDisplay)?.length}} <br>
 <ul *ngFor="let member of membersDisplay" (click)="showMember(member.name,member.gender,member.japnative,member.organiser,
 member.fluentjapanese,member.fluentenglish,member.hobby,member.groupID,member.docID)">
   <li>
-    <strong>{{ member.name }}</strong> {{  member.gender  }}    Japanese:{{ member.japnative}} Organiser:{{ member.organiser   }}
-    Group:{{ member.groupID }}   
+    <strong>{{ member.name }}</strong> {{member.gender}}, Japanese:{{member.japnative}} 
+Organiser:{{member.organiser}}, hobby:{{member.hobby}}, Group:{{ member.groupID }}   
   </li>
 </ul>
 

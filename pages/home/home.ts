@@ -69,6 +69,13 @@ export class HomePage {
 //      {this.navCtrl.push('AdminPage');}
   }
 
+  goToVotePPage() {
+    this.navCtrl.push('VotePage');
+
+  }
+
+
+
   ionViewDidLoad() {
 
     this.members=this.ds.pullDataSnapshotChangesFS(this.collectionName);

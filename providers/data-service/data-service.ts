@@ -149,10 +149,10 @@ pushDataFS(collectionName:string,item:any) {
     return this.items;
   }
  
-  pullDataSnapshotChangesFS(collectionName:string):Observable<any[]> {
+  pullDataSnapshotChangesFS(collectionName:string):Observable {
 
     var itemsCollection: AngularFirestoreCollection<any>;
-    var items: Observable<any[]>;
+    var items: Observable;
 
     itemsCollection = this.afs.collection<any>(collectionName);
 

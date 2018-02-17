@@ -39,7 +39,7 @@
         </ion-item>
 
 
-        <button ion-button [disabled]="!memberForm.valid" type="submit">Vote</button>
+        <button ion-button type="submit">Vote</button>
   </form>
 
 
@@ -47,7 +47,7 @@
 
 <ul *ngFor="let member of membersDisplayJapSpeakers" >
   <li>
-    <strong>{{ member.name }}</strong> --->  Group:{{ member.groupID }}
+    <strong>{{ member.name }}</strong> --->  Best Japanese speaker vote:{{member.voteJapaneseSpeaker }}
   </li>
 </ul>
 

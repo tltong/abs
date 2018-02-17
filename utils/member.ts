@@ -8,6 +8,11 @@ export class Member {
   hobby: string;
   groupID:number; 
   docID:string;
+  voteJapaneseSpeaker:number;
+  voteEnglishSpeaker:number;
+  voteEntertainingSpeaker:number;
+
+
 
   constructor(name, gender, japnative, organiser, fluentjapanese, fluentenglish, hobby){
     this.name=name;
@@ -18,7 +23,30 @@ export class Member {
     this.fluentenglish=fluentenglish;
     this.hobby=hobby;
 
+    this.voteJapaneseSpeaker = 0;
+    this.voteEnglishSpeaker = 0;
+    this.voteEntertainingSpeaker = 0;
+
   }
+
+  clearAllVotes() {
+    this.voteJapaneseSpeaker = 0;
+    this.voteEnglishSpeaker = 0;
+    this.voteEntertainingSpeaker = 0;
+  }
+
+  castVoteJapaneseSpeaker() {
+    this.voteJapaneseSpeaker++;
+  }
+
+  castVoteEnglishSpeaker() {
+    this.voteEnglishSpeaker++;
+  }
+
+  castVoteEntertainingSpeaker() {
+    this.voteEntertainingSpeaker++;
+  }
+
 
   setgroupID(id:number) {
     this.groupID=id;
@@ -46,12 +74,8 @@ export class Member {
         this.docID=fieldValue;
         break;
       }
-
    }
-
-
   }
-
 
 
 

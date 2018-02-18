@@ -44,7 +44,19 @@ export class VotePage implements OnDestroy{
     var update;
     var members$: Observable<any[]>;
     var $members: ISubscription;  
-    var member:Member;
+
+    var memberJapaneseSpeaker:Member;
+    var docIDJapaneseSpeaker:string; 
+    var queriedItemJapaneseSpeaker:Member;
+
+    var memberEnglishSpeaker:Member;
+    var docIDEnglishSpeaker:string; 
+    var queriedItemEnglishSpeaker:Member;
+
+    var memberEntertainingSpeaker:Member;
+    var docIDEntertainingSpeaker:string; 
+    var queriedItemEntertainingSpeaker:Member;
+
 
     update=1;
     //best japanese speaker  
@@ -53,35 +65,69 @@ export class VotePage implements OnDestroy{
 
     $members=members$.subscribe(queriedItems => {
       if (update==1) {
+
         if (queriedItems.length > 0) {
           for (let i=0;i<queriedItems.length;i++) {
-            if (queriedItems[i].docID==this.memberForm.value.nameJapaneseSpeaker){
-              member = new Member(queriedItems[i].name,queriedItems[i].gender,
-                           queriedItems[i].japnative,queriedItems[i].organiser,
-                           queriedItems[i].fluentjapanese,queriedItems[i].fluentenglish,
-                           queriedItems[i].hobby);
-              member.update("docID",queriedItems[i].id);
-              member.setgroupID(queriedItems[i].groupID);
-              for (let j=0;j<queriedItems[i].voteJapaneseSpeaker;j++) { member.castVoteJapaneseSpeaker(); }    
-              for (let j=0;j<queriedItems[i].voteEnglishSpeaker;j++) { member.castVoteEnglishSpeaker(); }    
-              for (let j=0;j<queriedItems[i].voteEntertainingSpeaker;j++) { member.castVoteEntertainingSpeaker(); }    
+           if (queriedItems[i].docID==this.memberForm.value.nameJapaneseSpeaker){
+             docIDJapaneseSpeaker=queriedItems[i].docID;
+             queriedItemJapaneseSpeaker = queriedItems[i];
+           }
+           if (queriedItems[i].docID==this.memberForm.value.nameEnglishSpeaker){
+             docIDEnglishSpeaker=queriedItems[i].docID;
+             queriedItemEnglishSpeaker = queriedItems[i];
+           }
+           if (queriedItems[i].docID==this.memberForm.value.nameEntertainingSpeaker){
+             docIDEntertainingSpeaker=queriedItems[i].docID;
+             queriedItemEntertainingSpeaker = queriedItems[i];
+           }
 
-              member.castVoteJapaneseSpeaker(); // cast vote
-
-              this.ds.updateDocument(this.collectionName,member.docID,member);
-              break;
-            }
           } // for loop
+          memberJapaneseSpeaker = this.constructMember(queriedItemJapaneseSpeaker);
+          memberJapaneseSpeaker.castVoteJapaneseSpeaker(); // cast vote
+
+          memberEnglishSpeaker = this.constructMember(queriedItemEnglishSpeaker);
+          memberEnglishSpeaker.castVoteEnglishSpeaker(); // cast vote
+
+          memberEntertainingSpeaker = this.constructMember(queriedItemEntertainingSpeaker);
+          memberEntertainingSpeaker.castVoteEntertainingSpeaker(); // cast vote
+
+
+          this.ds.updateDocumentPromise(this.collectionName,docIDJapaneseSpeaker,memberJapaneseSpeaker).
+          then( () => {   
+            this.ds.updateDocumentPromise(this.collectionName,docIDEnglishSpeaker,memberEnglishSpeaker).
+            then( () => {   
+              this.ds.updateDocumentPromise(this.collectionName,docIDEntertainingSpeaker,memberEntertainingSpeaker).
+              then( () => {   
+                this.ps.presentAlert('Thank you for voting','You voted for ' + memberJapaneseSpeaker.name + ', ' +
+                  memberEnglishSpeaker.name + ', ' + memberEntertainingSpeaker.name,'Ok');
+                  $members.unsubscribe();
+                  this.memberForm.reset();
+              });
+            });
+          });
+
           update=0;
        } //if queriedItems.length > 0
 
       }// if update
 
     });
+  }
 
+  constructMember(item:any):Member {
 
-//    this.ps.presentToast('best japansese speaker'+this.memberForm.value.nameJapaneseSpeaker);
+  var member:Member;
+              member = new Member(item.name,item.gender,
+                           item.japnative,item.organiser,
+                           item.fluentjapanese,item.fluentenglish,
+                           item.hobby);
+              member.update("docID",item.id);
+              member.setgroupID(item.groupID);
+              for (let j=0;j<item.voteJapaneseSpeaker;j++) { member.castVoteJapaneseSpeaker(); }    
+              for (let j=0;j<item.voteEnglishSpeaker;j++) { member.castVoteEnglishSpeaker(); }    
+              for (let j=0;j<item.voteEntertainingSpeaker;j++) { member.castVoteEntertainingSpeaker(); }    
 
+    return member;
   }
 
   ionViewDidLoad() {

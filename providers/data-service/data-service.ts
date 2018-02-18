@@ -206,5 +206,27 @@ pushDataFS(collectionName:string,item:any) {
     itemsCollection.doc(docID).update(item.getData());
   }
 
+  updateDocumentPromise(collectionName:string, docID:string,item:any) {
+
+    var promise = new Promise((resolve, reject) => {
+
+      var itemsCollection: AngularFirestoreCollection<any>;
+      itemsCollection = this.afs.collection<any>(collectionName);
+      itemsCollection.doc(docID).update(item.getData()).then(function() {
+      resolve();
+       })
+      .catch(function(error) {
+       reject(error);
+  });
+ 
+  });
+
+   return promise;
+
+    
+
+  }
+
+
 
 }

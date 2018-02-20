@@ -15,7 +15,7 @@ export class MemberProvider {
 
   public constructMemberRaw(name:string,gender:string,japnative:string,organiser:string,
     fluentjapanese:string,fluentenglish:string,hobby:string,groupID:number,docID:string,
-    voteJapaneseSpeaker:number,public voteEnglishSpeaker:number,voteEntertainingSpeaker:number):Member {
+    voteJapaneseSpeaker:number,voteEnglishSpeaker:number,voteEntertainingSpeaker:number):Member {
 
     var member:Member; 
     member = new Member(name,gender,

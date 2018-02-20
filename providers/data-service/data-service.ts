@@ -34,9 +34,24 @@ export class DataServiceProvider {
     }
   }
 
+
+/* WIP *****
+  findArray(inArray:Array<any>,property:string,value:string):any {
+   
+    for (let i=0;i<inArray.length;i++){
+      if (inArray[i].==
+    }
+  }
+*/
+
   sortArray(inArray:Array<any>,property:string):Array<any> {
     return inArray.sort(this.dynamicSort(property));
   }
+
+  sortArrayReverse(inArray:Array<any>,property:string):Array<any> {
+    return inArray.sort(this.dynamicSort(property)).reverse();
+  }
+
   
   randomiseArray(inArray:Array<any>):Array<any> {
 

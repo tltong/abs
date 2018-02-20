@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestore,AngularFirestoreCollection } from 'angularfire2/firestore';
 import { PhoneServiceProvider } from '../providers/phone-service/phone-service';
+import { MemberProvider } from '../providers/member/member';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAio_94Pw0FrTLCLAAh3-8oY45AN9m0bbg",
@@ -48,7 +49,8 @@ export const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataServiceProvider,
-    PhoneServiceProvider
+    PhoneServiceProvider,
+    MemberProvider
   ]
 })
 export class AppModule {}

@@ -1,16 +1,16 @@
 export class Member {
-  name: string;
-  gender: string;
-  japnative: string;
-  organiser: string;
-  fluentjapanese: string;
-  fluentenglish: string;
-  hobby: string;
-  groupID:number; 
-  docID:string;
-  voteJapaneseSpeaker:number;
-  voteEnglishSpeaker:number;
-  voteEntertainingSpeaker:number;
+  public name: string;
+  public gender: string;
+  public japnative: string;
+  public organiser: string;
+  public fluentjapanese: string;
+  public fluentenglish: string;
+  public hobby: string;
+  public groupID:number; 
+  public docID:string;
+  public voteJapaneseSpeaker:number;
+  public voteEnglishSpeaker:number;
+  public voteEntertainingSpeaker:number;
 
 
 

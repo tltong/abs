@@ -69,10 +69,25 @@
         </ion-item>
 
         <ion-item>
+            <ion-label floating>Votes for Japanese speaker</ion-label>
+            <ion-input formControlName="voteJapaneseSpeaker" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Votes for English speaker</ion-label>
+            <ion-input formControlName="voteEnglishSpeaker" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Votes for Entertaining speaker</ion-label>
+            <ion-input formControlName="voteEntertainingSpeaker" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
             <ion-label floating>Doc ID</ion-label>
             <ion-input formControlName="docID" type="text"></ion-input>
         </ion-item>
-        <button ion-button [disabled]="!memberForm.valid" type="submit">Submit</button>
+        <button ion-button [disabled]="!memberForm.valid" type="submit">Update</button>
         <button ion-button [disabled]="!memberForm.valid" type="button" (click)="formDelete()">Delete</button>
   </form>
 <button ion-button (click)="test()">Test</button>
@@ -81,15 +96,38 @@
     <ion-label floating>Number of groups</ion-label>
     <ion-input type="text" [(ngModel)]="tb_pplgroup"></ion-input>
 </ion-item>
-<button ion-button (click)="refresh()">Refresh</button>
+<button ion-button (click)="refresh()">Shuffle members</button>
 <br><br>
 Total : {{(membersDisplay)?.length}} <br>
 <ul *ngFor="let member of membersDisplay" (click)="showMember(member.name,member.gender,member.japnative,member.organiser,
-member.fluentjapanese,member.fluentenglish,member.hobby,member.groupID,member.docID)">
+member.fluentjapanese,member.fluentenglish,member.hobby,member.groupID,
+member.voteJapaneseSpeaker,member.voteEnglishSpeaker,member.voteEntertainingSpeaker,member.docID)">
   <li>
     <strong>{{ member.name }}</strong> {{member.gender}}, Japanese:{{member.japnative}} 
 Organiser:{{member.organiser}}, hobby:{{member.hobby}}, Group:{{ member.groupID }}   
   </li>
 </ul>
+
+<br>Best Japanese speakers: <br>
+<ul *ngFor="let member of membersJapaneseSpeakers | slice:0:3">
+  <li>
+    <strong>{{ member.name }}</strong> Votes : {{member.voteJapaneseSpeaker}} 
+  </li>
+</ul>
+
+<br>Best English speakers: <br>
+<ul *ngFor="let member of membersEnglishSpeakers | slice:0:3">
+  <li>
+    <strong>{{ member.name }}</strong> Votes : {{member.voteEnglishSpeaker}} 
+  </li>
+</ul>
+
+<br>Most Entertaining speakers: <br>
+<ul *ngFor="let member of membersEntertainingSpeakers | slice:0:3">
+  <li>
+    <strong>{{ member.name }}</strong> Votes : {{member.voteEntertainingSpeaker}} 
+  </li>
+</ul>
+
 
 </ion-content>

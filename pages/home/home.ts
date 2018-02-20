@@ -1,3 +1,6 @@
+
+import { OnDestroy } from "@angular/core";
+import { ISubscription } from "rxjs/Subscription";
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +18,8 @@ import { AlertController } from 'ionic-angular';
 export class HomePage {
 
   members:Observable<any[]>;
+  $members: ISubscription;
+
   membersDisplay:Array<any>;
   collectionName:string = "abs-members";
   date = Date();
@@ -74,16 +79,16 @@ export class HomePage {
 
   }
 
-
+  ngOnDestroy() {
+    this.$members.unsubscribe();
+  }
 
   ionViewDidLoad() {
-
     this.members=this.ds.pullDataSnapshotChangesFS(this.collectionName);
-    this.members.subscribe(queriedItems => {
+    this.$members=this.members.subscribe(queriedItems => {
       if (queriedItems.length > 0) {
         this.membersDisplay = this.ds.sortArray(queriedItems,"groupID");
       }
       });
   }
-
 }

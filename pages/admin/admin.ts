@@ -1,4 +1,5 @@
-
+import { OnDestroy } from "@angular/core";
+import { ISubscription } from "rxjs/Subscription";
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +25,10 @@ export class AdminPage {
   collectionName:string;    
   pplgroup_count:number;  
   test_string:string;  
+
   members:Observable<any[]>;
+  $members: ISubscription;
+
   membersDisplay:Array<any>;
   memberSelected:Member;
   memberForm: FormGroup;
@@ -79,11 +83,6 @@ export class AdminPage {
     this.memberForm.get('docID').setValue(docID);
   }
 
-
-  test() {
-    this.ps.presentConfirm('Alert','Are you sure?').then( ()=> { this.ps.presentToast("ok");  } );
-  }
-
   formDelete() {
     this.ps.presentConfirm('Alert','Delete user?').then( ()=> { 
       this.ds.deleteDocument(this.collectionName,this.memberForm.value.docID);  
@@ -126,6 +125,8 @@ export class AdminPage {
 
   refresh() {
     var members:Observable<any[]>;
+    var $members: ISubscription;  
+
     var member:Member;
     var i:number=0;
     var memberArray:Member[];
@@ -133,7 +134,7 @@ export class AdminPage {
     var update=1;   
 
     members = this.ds.pullDataSnapshotChangesFS(this.collectionName);
-    members.subscribe(
+    $members=members.subscribe(
       queriedItems => {   
 
         if (update==1)
@@ -189,6 +190,7 @@ export class AdminPage {
           this.assignGroupID(this.collectionName,memberArray);
 
         update=0;   
+        $members.unsubscribe();
         } // if update
       } // queriedItems
     ); // subscribe
@@ -213,9 +215,15 @@ export class AdminPage {
 //    this.test_string="name:" + memberArray[0].name + "group id:" + memberArray[0].groupID;
   } // assignGroupID
 
+
+  ngOnDestroy() {
+    this.$members.unsubscribe();
+  }
+
+
   ionViewDidLoad() {
     this.members=this.ds.pullDataSnapshotChangesFS(this.collectionName);
-    this.members.subscribe(queriedItems => {
+    this.$members=this.members.subscribe(queriedItems => {
       if (queriedItems.length > 0) {
         this.membersDisplay = this.ds.sortArray(queriedItems,"groupID");
         this.membersJapaneseSpeakers = new Array();

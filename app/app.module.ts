@@ -5,7 +5,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+import { AddMemberPage } from '../pages/add-member/add-member';
+import { AdminPage } from '../pages/admin/admin';
 import { HomePage } from '../pages/home/home';
+import { VotePage } from '../pages/vote/vote';
+import { TabsPage } from '../pages/tabs/tabs';
+
+
 import { DataServiceProvider } from '../providers/data-service/data-service';
 
 import { AngularFireModule } from 'angularfire2';
@@ -28,7 +34,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,8 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    TabsPage
   ],
   providers: [
     StatusBar,

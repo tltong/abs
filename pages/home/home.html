@@ -8,15 +8,7 @@
 
 <ion-content padding>
   Welcome to 飲みニケション {{date | date:'mediumDate' }}
-<br><br>
-  <button ion-button block (click)="goToAddMemberPage()">
-     Member registration
-  </button>
-  <button ion-button block (click)="goToVotePPage()">
-     Vote
-  </button>
-
-<br><br>
+<br><br><br>
 Total attendees : {{(membersDisplay)?.length}} <br>
 <ul *ngFor="let member of membersDisplay" >
   <li>

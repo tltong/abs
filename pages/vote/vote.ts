@@ -11,7 +11,6 @@ import { PhoneServiceProvider } from '../../providers/phone-service/phone-servic
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Member } from '../../utils/member'
 
-@IonicPage()
 @Component({
   selector: 'page-vote',
   templateUrl: 'vote.html',

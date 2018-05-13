@@ -36,6 +36,7 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     AddMemberPage,
+    VotePage,
     TabsPage
   ],
   imports: [
@@ -52,6 +53,7 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     AddMemberPage,
+    VotePage,
     TabsPage
   ],
   providers: [

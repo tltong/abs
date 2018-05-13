@@ -6,8 +6,6 @@ import { AdminPage } from '../admin/admin';
 import { HomePage } from '../home/home';
 import { VotePage } from '../vote/vote';
 
-
-@IonicPage()
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html',

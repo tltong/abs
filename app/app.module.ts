@@ -35,6 +35,7 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
+    AddMemberPage,
     TabsPage
   ],
   imports: [
@@ -50,6 +51,7 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
+    AddMemberPage,
     TabsPage
   ],
   providers: [

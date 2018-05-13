@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Member } from '../../utils/member'
 
-@IonicPage()
 @Component({
   selector: 'page-add-member',
   templateUrl: 'add-member.html',
